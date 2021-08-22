@@ -26,6 +26,7 @@ target_sources(ARMCM0
 )
 target_compile_definitions(ARMCM0 PUBLIC ARMCM0)
 target_compile_options(ARMCM0 PRIVATE -Wno-int-to-pointer-cast)
+target_compile_options(ARMCM0 PRIVATE -Wno-pointer-to-int-cast)
 
 
 add_library(ARMCM0plus)
@@ -45,6 +46,7 @@ target_sources(ARMCM0plus
 )
 target_compile_definitions(ARMCM0plus PUBLIC ARMCM0P)
 target_compile_options(ARMCM0plus PRIVATE -Wno-int-to-pointer-cast)
+target_compile_options(ARMCM0plus PRIVATE -Wno-pointer-to-int-cast)
 
 
 
@@ -65,6 +67,7 @@ target_sources(ARMCM0plusMpu
 )
 target_compile_definitions(ARMCM0plusMpu PUBLIC ARMCM0P_MPU)
 target_compile_options(ARMCM0plusMpu PRIVATE -Wno-int-to-pointer-cast)
+target_compile_options(ARMCM0plusMpu PRIVATE -Wno-pointer-to-int-cast)
 
 
 add_library(ARMCM1)
@@ -84,6 +87,7 @@ target_sources(ARMCM1
 )
 target_compile_definitions(ARMCM1 PUBLIC ARMCM1)
 target_compile_options(ARMCM1 PRIVATE -Wno-int-to-pointer-cast)
+target_compile_options(ARMCM1 PRIVATE -Wno-pointer-to-int-cast)
 
 
 add_library(ARMCM3)
@@ -103,6 +107,7 @@ target_sources(ARMCM3
 )
 target_compile_definitions(ARMCM3 PUBLIC ARMCM3)
 target_compile_options(ARMCM3 PRIVATE -Wno-int-to-pointer-cast)
+target_compile_options(ARMCM3 PRIVATE -Wno-pointer-to-int-cast)
 
 
 
@@ -123,6 +128,7 @@ target_sources(ARMCM4
 )
 target_compile_definitions(ARMCM4 PUBLIC ARMCM4)
 target_compile_options(ARMCM4 PRIVATE -Wno-int-to-pointer-cast)
+target_compile_options(ARMCM4 PRIVATE -Wno-pointer-to-int-cast)
 
 
 add_library(ARMCM7)
@@ -142,6 +148,7 @@ target_sources(ARMCM7
 )
 target_compile_definitions(ARMCM7 PUBLIC ARMCM7)
 target_compile_options(ARMCM7 PRIVATE -Wno-int-to-pointer-cast)
+target_compile_options(ARMCM7 PRIVATE -Wno-pointer-to-int-cast)
 
 
 include(GNUInstallDirs)
