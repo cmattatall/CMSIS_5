@@ -1,0 +1,61 @@
+# FindCMSIS.cmake
+#
+# This will define:
+#    CMSIS_FOUND
+#    CMSIS_VERSION
+#    CMSIS_INCLUDE_DIRS
+#
+# and the following imported targets
+#
+# @CMSIS_CORTEX_BRINGUP_TARGETS@
+#
+# Author: Carl Mattatall
+#
+
+#[[
+find_package(PkgConfig)
+pkg_check_modules(PC_RapidJSON QUIET CMSIS)
+
+find_path(CMSIS_INCLUDE_DIR
+    NAMES cmsis_compiler.h
+    PATHS ${PC_RapidJSON_INCLUDE_DIRS}
+    PATH_SUFFIXES rapidjson
+)
+
+set(CMSIS_VERSION @PROJECT_VERSION@)
+
+mark_as_advanced(CMSIS_FOUND CMSIS_VERSION CMSIS_INCLUDE_DIRS)
+
+include(FindPackageHandleStandardArgs)
+
+find_package_handle_standard_args(CMSIS
+    REQUIRED_VARS CMSIS_INCLUDE_DIR
+    VERSION_VAR CMSIS_VERSION
+)
+
+if(CMSIS_FOUND)
+    #Set include dirs to parent, to enable includes like #include <rapidjson/document.h>
+    get_filename_component(CMSIS_INCLUDE_DIRS ${CMSIS_INCLUDE_DIR} DIRECTORY)
+endif()
+
+if(CMSIS_FOUND)
+    foreach(target @CMSIS_CORTEX_BRINGUP_TARGETS@)
+        if(NOT TARGET CMSIS::${target})
+            add_library(CMSIS::${target} INTERFACE IMPORTED)
+
+
+        endif(NOT TARGET CMSIS::${target})
+    endforeach(target @CMSIS_CORTEX_BRINGUP_TARGETS@)
+    
+endif(CMSIS_FOUND)
+
+
+
+if(CMSIS_FOUND AND NOT TARGET CMSIS::RapidJSON)
+    add_library(RapidJSON::RapidJSON INTERFACE IMPORTED)
+    set_target_properties(RapidJSON::RapidJSON PROPERTIES
+        INTERFACE_INCLUDE_DIRECTORIES "${RapidJSON_INCLUDE_DIRS}"
+    )
+endif()
+
+#]]
