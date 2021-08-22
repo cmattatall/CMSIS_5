@@ -310,10 +310,42 @@ target_compile_options(ARMCM33
         -march=armv8-m.main
 )
 
+add_library(ARMCM35P)
+list(APPEND CMSIS_CORTEX_BRINGUP_TARGETS ARMCM35P)
+target_include_directories(ARMCM35P
+    PUBLIC 
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/ARMCM35P/Include>
+        $<INSTALL_INTERFACE:CMSIS/Device/ARM/ARMCM35P/Include>
+    PRIVATE
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/Core/Include>
+        $<INSTALL_INTERFACE:CMSIS/Core/Include>
+)
+target_sources(ARMCM35P 
+    PRIVATE
+        Device/ARM/ARMCM35P/Source/startup_ARMCM35P.c
+        Device/ARM/ARMCM35P/Source/system_ARMCM35P.c
+)
+target_compile_definitions(ARMCM35P PUBLIC ARMCM35P)
+target_compile_options(ARMCM35P
+    PRIVATE 
+        -Wno-int-to-pointer-cast
+        -Wno-pointer-to-int-cast
+    PUBLIC
+        -mthumb
+        #-mcpu=cortex-m35p # seems that not all versions of arm-none-eabi-gcc toolchain support this flag for mcpu
+        -march=armv8-m.main
+        -mfpu=fpv5-sp-d16
+)
+
+#[[
+cc1: note: valid arguments are: arm8 arm810 strongarm strongarm110 fa526 fa626 arm7tdmi arm7tdmi-s arm710t arm720t arm740t arm9 arm9tdmi arm920t arm920 arm922t arm940t ep9312 arm10tdmi arm1020t arm9e arm946e-s arm966e-s arm968e-s arm10e arm1020e arm1022e xscale iwmmxt iwmmxt2 fa606te fa626te fmp626 fa726te arm926ej-s arm1026ej-s arm1136j-s arm1136jf-s arm1176jz-s arm1176jzf-s mpcorenovfp mpcore arm1156t2-s arm1156t2f-s cortex-m1 cortex-m0 cortex-m0plus cortex-m1.small-multiply cortex-m0.small-multiply cortex-m0plus.small-multiply generic-armv7-a cortex-a5 cortex-a7 cortex-a8 cortex-a9 cortex-a12 cortex-a15 cortex-a17 cortex-r4 cortex-r4f cortex-r5 cortex-r7 cortex-r8 cortex-m7 cortex-m4 cortex-m3 marvell-pj4 cortex-a15.cortex-a7 cortex-a17.cortex-a7 cortex-a32 cortex-a35 cortex-a53 cortex-a57 cortex-a72 cortex-a73 exynos-m1 xgene1 cortex-a57.cortex-a53 cortex-a72.cortex-a53 cortex-a73.cortex-a35 cortex-a73.cortex-a53 cortex-a55 cortex-a75 cortex-a76 neoverse-n1 cortex-a75.cortex-a55 cortex-a76.cortex-a55 cortex-m23 cortex-m33 cortex-r52; did you mean 'cortex-m3'?
+make[2]: *** [CMakeFiles/ARMCM35P.dir/build.make:76: CMakeFiles/ARMCM35P.dir/Device/ARM/ARMCM35P/Source/startup_ARMCM35P.c.obj] Error 1
+make[1]: *** [CMakeFiles/Makefile2:391: CMakeFiles/ARMCM35P.dir/all] Error 2
 
 
 
 
+#]]
 
 
 if(NOT CPACK_PACKAGING_INSTALL_PREFIX)
