@@ -5,6 +5,8 @@ project(CMSIS
     LANGUAGES C ASM
 )
 
+
+
 set(CMSIS_CORTEX_BRINGUP_TARGETS "") # empty list
 
 add_library(ARMCM0)
@@ -23,7 +25,7 @@ target_sources(ARMCM0
         Device/ARM/ARMCM0/Source/system_ARMCM0.c
 )
 target_compile_definitions(ARMCM0 PUBLIC ARMCM0)
-
+target_compile_options(ARMCM0 PRIVATE -Wno-int-to-pointer-cast)
 
 
 add_library(ARMCM0plus)
@@ -42,6 +44,8 @@ target_sources(ARMCM0plus
         Device/ARM/ARMCM0plus/Source/system_ARMCM0plus.c
 )
 target_compile_definitions(ARMCM0plus PUBLIC ARMCM0P)
+target_compile_options(ARMCM0plus PRIVATE -Wno-int-to-pointer-cast)
+
 
 
 add_library(ARMCM0plusMpu)
@@ -60,6 +64,7 @@ target_sources(ARMCM0plusMpu
         Device/ARM/ARMCM0plus/Source/system_ARMCM0plus.c
 )
 target_compile_definitions(ARMCM0plusMpu PUBLIC ARMCM0P_MPU)
+target_compile_options(ARMCM0plusMpu PRIVATE -Wno-int-to-pointer-cast)
 
 
 add_library(ARMCM1)
@@ -78,6 +83,7 @@ target_sources(ARMCM1
         Device/ARM/ARMCM1/Source/system_ARMCM1.c
 )
 target_compile_definitions(ARMCM1 PUBLIC ARMCM1)
+target_compile_options(ARMCM1 PRIVATE -Wno-int-to-pointer-cast)
 
 
 add_library(ARMCM3)
@@ -96,6 +102,8 @@ target_sources(ARMCM3
         Device/ARM/ARMCM3/Source/system_ARMCM3.c
 )
 target_compile_definitions(ARMCM3 PUBLIC ARMCM3)
+target_compile_options(ARMCM3 PRIVATE -Wno-int-to-pointer-cast)
+
 
 
 add_library(ARMCM4)
@@ -114,6 +122,7 @@ target_sources(ARMCM4
         Device/ARM/ARMCM4/Source/system_ARMCM4.c
 )
 target_compile_definitions(ARMCM4 PUBLIC ARMCM4)
+target_compile_options(ARMCM4 PRIVATE -Wno-int-to-pointer-cast)
 
 
 add_library(ARMCM7)
@@ -132,6 +141,7 @@ target_sources(ARMCM7
         Device/ARM/ARMCM7/Source/system_ARMCM7.c
 )
 target_compile_definitions(ARMCM7 PUBLIC ARMCM7)
+target_compile_options(ARMCM7 PRIVATE -Wno-int-to-pointer-cast)
 
 
 include(GNUInstallDirs)
@@ -174,7 +184,6 @@ foreach(DIR ${DEVICE_IDIRS})
     )
 
 endforeach(DIR ${DEVICE_IDIRS})
-
 
 
 install(
