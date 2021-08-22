@@ -288,7 +288,7 @@ function(print_section_sizes TARGET)
         POST_BUILD 
         COMMAND ${CMAKE_SIZE} ${TARGET}
     )
-endfunction(create_hex_output TARGET)
+endfunction()
 
 
 #-------------------------------------------------------------------------------
@@ -304,7 +304,7 @@ function(create_hex_output TARGET)
     else()
         message(FATAL_ERROR "Target ${TARGET} is not a target. function ${CMAKE_CURRENT_FUNCTION_} cannot proceed.")
     endif(TARGET ${TARGET})
-endfunction(create_hex_output TARGET)
+endfunction()
 
 
 #-------------------------------------------------------------------------------
@@ -321,7 +321,7 @@ function(create_bin_output TARGET)
     else()
         message(FATAL_ERROR "Target ${TARGET} is not a target. function ${CMAKE_CURRENT_FUNCTION_} cannot proceed.")
     endif(TARGET ${TARGET})
-endfunction(create_bin_output TARGET)
+endfunction()
 
 
 function(create_lss_output TARGET)
@@ -410,7 +410,7 @@ function(create_lss_output TARGET)
     else()
         message(FATAL_ERROR "Target ${TARGET} is not a target. function ${CMAKE_CURRENT_FUNCTION_} cannot proceed.")
     endif(TARGET ${TARGET})
-endfunction(create_lss_output TARGET)
+endfunction()
 
 #[[
 add_custom_command( 
