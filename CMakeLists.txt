@@ -155,7 +155,6 @@ file(GLOB DEVICE_IDIRS "${CMAKE_CURRENT_LIST_DIR}/Device/ARM/*/Include")
 foreach(DIR ${DEVICE_IDIRS})
     get_filename_component(DEVICE_PATH ${DIR} DIRECTORY)
     get_filename_component(DEVICE ${DEVICE_PATH} NAME)
-    message("${DEVICE}")
     install(
         DIRECTORY       ${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/${DEVICE}/Include/
         DESTINATION     ${CMAKE_INSTALL_INCLUDEDIR}/CMSIS/Device/${DEVICE}/
@@ -225,16 +224,16 @@ install(
 export(PACKAGE CMSIS)
 
 
-set(CPACK_PACKAGING_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/install_prefix")
+################################################################################
+## CPACK STUFF
+################################################################################
 
-# Write and set permissions for postinst
-
-message("CPACK_PACKAGING_INSTALL_PREFIX = ${CPACK_PACKAGING_INSTALL_PREFIX}")
 
 if(NOT CPACK_PACKAGING_INSTALL_PREFIX)
-    set(CPACK_PACKAGING_INSTALL_PREFIX "/usr/local/")
+    set(CPACK_PACKAGING_INSTALL_PREFIX "/usr/local/CMSIS/")
 endif(NOT CPACK_PACKAGING_INSTALL_PREFIX)
 
+# Write and set permissions for postinst
 file(WRITE
     ${CMAKE_CURRENT_BINARY_DIR}/tmp/postinst
     "#!/bin/bash\n                                                                                        \
