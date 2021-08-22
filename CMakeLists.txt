@@ -147,24 +147,29 @@ target_sources(ARMCM7
         Device/ARM/ARMCM7/Source/system_ARMCM7.c
 )
 target_compile_definitions(ARMCM7 PUBLIC ARMCM7)
-target_compile_options(ARMCM7 PRIVATE -Wno-int-to-pointer-cast)
-target_compile_options(ARMCM7 PRIVATE -Wno-pointer-to-int-cast)
+
+if(NOT CPACK_PACKAGING_INSTALL_PREFIX)
+    set(CPACK_PACKAGING_INSTALL_PREFIX ${PROJECT_SOURCE_DIR}/install/)
+endif(NOT CPACK_PACKAGING_INSTALL_PREFIX)
 
 
-include(GNUInstallDirs)
-set(INSTALL_CONFIGDIR ${CMAKE_INSTALL_LIBDIR}/cmake/CMSIS)
+set(INSTALL_LIBDIR lib)
+set(INSTALL_INCLUDEDIR include)
+set(INSTALL_BINDIR bin)
+
+set(INSTALL_CONFIGDIR ${INSTALL_LIBDIR}/cmake/CMSIS)
 
 install(
     TARGETS     ${CMSIS_CORTEX_BRINGUP_TARGETS}
     EXPORT      CMSIS
-    LIBRARY     DESTINATION ${CMAKE_INSTALL_LIBDIR}/CMSIS/
-    ARCHIVE     DESTINATION ${CMAKE_INSTALL_LIBDIR}/CMSIS/
+    LIBRARY     DESTINATION ${INSTALL_LIBDIR}/CMSIS/
+    ARCHIVE     DESTINATION ${INSTALL_LIBDIR}/CMSIS/
     COMPONENT   lib
 )
 
 install(
     DIRECTORY       ${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/Core/Include/
-    DESTINATION     ${CMAKE_INSTALL_INCLUDEDIR}/CMSIS/Core/
+    DESTINATION     ${INSTALL_INCLUDEDIR}/CMSIS/Core/
     FILES_MATCHING  PATTERN "*.h"
 )
 
@@ -174,19 +179,19 @@ foreach(DIR ${DEVICE_IDIRS})
     get_filename_component(DEVICE ${DEVICE_PATH} NAME)
     install(
         DIRECTORY       ${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/${DEVICE}/Include/
-        DESTINATION     ${CMAKE_INSTALL_INCLUDEDIR}/CMSIS/Device/${DEVICE}/
+        DESTINATION     ${INSTALL_INCLUDEDIR}/CMSIS/Device/${DEVICE}/
         FILES_MATCHING  PATTERN "*.h"
     )
 
     install(
         DIRECTORY       ${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/${DEVICE}/Config/
-        DESTINATION     ${CMAKE_INSTALL_INCLUDEDIR}/CMSIS/Device/${DEVICE}/
+        DESTINATION     ${INSTALL_INCLUDEDIR}/CMSIS/Device/${DEVICE}/
         FILES_MATCHING  PATTERN "*.h"
     )
 
     install(
         DIRECTORY       ${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/${DEVICE}/Source/GCC/
-        DESTINATION     ${CMAKE_INSTALL_INCLUDEDIR}/CMSIS/Device/${DEVICE}/
+        DESTINATION     ${INSTALL_INCLUDEDIR}/CMSIS/Device/${DEVICE}/
         FILES_MATCHING  PATTERN "*.ld"
     )
 
@@ -254,8 +259,8 @@ file(WRITE
     ${CMAKE_CURRENT_BINARY_DIR}/tmp/postinst
     "#!/bin/bash\n                                                                                        \
     ldconfig\n                                                                                            \
-    chown $(whoami):$(whoami) -R ${CPACK_PACKAGING_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/CMSIS\n    \
-    chown $(whoami):$(whoami) -R ${CPACK_PACKAGING_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/CMSIS\n        \  
+    chown $(whoami):$(whoami) -R ${CPACK_PACKAGING_INSTALL_PREFIX}/${INSTALL_INCLUDEDIR}/CMSIS\n    \
+    chown $(whoami):$(whoami) -R ${CPACK_PACKAGING_INSTALL_PREFIX}/${INSTALL_LIBDIR}/CMSIS\n        \  
     "
 )
 
