@@ -157,19 +157,26 @@ foreach(DIR ${DEVICE_IDIRS})
     get_filename_component(DEVICE ${DEVICE_PATH} NAME)
     message("${DEVICE}")
     install(
-        DIRECTORY       ${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/Device/ARM/${DEVICE}/Include/
+        DIRECTORY       ${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/${DEVICE}/Include/
         DESTINATION     ${CMAKE_INSTALL_INCLUDEDIR}/CMSIS/Device/${DEVICE}/
         FILES_MATCHING  PATTERN "*.h"
     )
+
+    install(
+        DIRECTORY       ${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/${DEVICE}/Config/
+        DESTINATION     ${CMAKE_INSTALL_INCLUDEDIR}/CMSIS/Device/${DEVICE}/
+        FILES_MATCHING  PATTERN "*.h"
+    )
+
+    install(
+        DIRECTORY       ${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/${DEVICE}/Source/GCC/
+        DESTINATION     ${CMAKE_INSTALL_INCLUDEDIR}/CMSIS/Device/${DEVICE}/
+        FILES_MATCHING  PATTERN "*.ld"
+    )
+
 endforeach(DIR ${DEVICE_IDIRS})
 
-#[[
-install(
-    DIRECTORY       ${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/Device/ARM/
-    DESTINATION     ${CMAKE_INSTALL_INCLUDEDIR}/CMSIS/Device/
-    FILES_MATCHING  PATTERN "*/Include/*.h"
-)
-#]]
+
 
 install(
     EXPORT      CMSIS
