@@ -55,7 +55,6 @@ set(TOOLCHAIN_OBJCOPY_NAME ${TOOLCHAIN_PREFIX}-objcopy${CMAKE_EXECUTABLE_SUFFIX}
 set(TOOLCHAIN_OBJDUMP_NAME ${TOOLCHAIN_PREFIX}-objdump${CMAKE_EXECUTABLE_SUFFIX})
 set(TOOLCHAIN_SIZE_NAME ${TOOLCHAIN_PREFIX}-size${CMAKE_EXECUTABLE_SUFFIX})
 set(TOOLCHAIN_GDB_NAME ${TOOLCHAIN_PREFIX}-gdb${CMAKE_EXECUTABLE_SUFFIX})
-set(TOOLCHAIN_STRIP_NAME ${TOOLCHAIN_PREFIX}-strip${CMAKE_EXECUTABLE_SUFFIX})
 
 # Print configuration info to callee
 if(NOT DEFINED ENV{TOOLCHAIN_PROCESSED})
@@ -245,12 +244,6 @@ find_program(
     REQUIRED
 )
 
-find_program(
-    CMAKE_STRIP 
-    NAMES ${TOOLCHAIN_STRIP_NAME}
-    HINTS ${TOOLCHAIN_BINUTILS_SEARCH_HINTS} 
-    REQUIRED
-)
 
 # Note that GDB may not necessarily be required because we could be semihosting
 # (or maybe we just don't care about debugging on our platform or something)
