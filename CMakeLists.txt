@@ -6,7 +6,6 @@ project(CMSIS
 )
 
 
-
 set(CMSIS_CORTEX_BRINGUP_TARGETS "") # empty list
 
 add_library(ARMCM0)
@@ -33,9 +32,6 @@ target_compile_options(ARMCM0
         -mthumb
         -mcpu=cortex-m0
 )
-
-
-
 
 
 add_library(ARMCM0plus)
@@ -276,54 +272,29 @@ target_compile_options(${CPU_TARGET}
     PUBLIC
         -mthumb
         -mcpu=cortex-m23
-        -march=armv8-m.main
-        # Pretty uncertain on this one, there seems to have been a divergence
-        # in the ISA betwen for armv7 and armv8. One of several compiler
-        # options may be needed to make this work. 
-        # - armv7e-m <-- this one is pretty unlikely
-        # - armv8-m.base 
-        # - armv8-m.main <-- I've use this one for now
 )
 
 
 
-
-# CMSIS HEADERS ARE BROKEN FOR ARMCM33 :(
-# We have to fix 
-# https://github.com/zephyrproject-rtos/zephyr/issues/4983
-
-add_library(ARMCM33_BASE INTERFACE)
-
-# TODO: The export interface is currently broken. We only want to use this target for building and not export it
-#       but cmake is forcing us to export because it is a transient dependency of the derived targets.
-#       Since we only export AFTER building it should be possible to resolve this dependency at build time...
-#
-# Ideally we'd like to derive from the base target and provide compile-definition properties
-
-# BELOW IS THE COMMAND YOU HAVE TO UNCOMMENT TO EXPORT
-# 
-# list(APPEND CMSIS_CORTEX_BRINGUP_TARGETS ARMCM33_BASE)
-target_include_directories(ARMCM33_BASE 
-    INTERFACE 
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/ARMCM33/Include>
-        $<INSTALL_INTERFACE:CMSIS/Device/ARM/ARMCM33/Include>
+set(CPU_TARGET ARMCM33)
+set(CPU_CMSIS_DIR ARMCM33)
+add_library(${CPU_TARGET})
+list(APPEND CMSIS_CORTEX_BRINGUP_TARGETS ${CPU_TARGET})
+target_include_directories(${CPU_TARGET}
+    PUBLIC 
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/${CPU_CMSIS_DIR}/Include>
+        $<INSTALL_INTERFACE:CMSIS/Device/ARM/${CPU_CMSIS_DIR}/Include>
+    PRIVATE
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/Core/Include>
         $<INSTALL_INTERFACE:CMSIS/Core/Include>
 )
-target_sources(ARMCM33_BASE 
-    INTERFACE
-        Device/ARM/ARMCM33/Source/startup_ARMCM33.c
-        Device/ARM/ARMCM33/Source/system_ARMCM33.c
+target_sources(${CPU_TARGET} 
+    PRIVATE
+        Device/ARM/${CPU_CMSIS_DIR}/Source/startup_${CPU_CMSIS_DIR}.c
+        Device/ARM/${CPU_CMSIS_DIR}/Source/system_${CPU_CMSIS_DIR}.c
 )
-
-
-add_library(ARMCM33)
-
-# TODO: FIX THE EXPORT SET DEPENDENCIES ON THE INTERFACE TARGETS.
-#list(APPEND CMSIS_CORTEX_BRINGUP_TARGETS ARMCM33) 
-target_link_libraries(ARMCM33 PUBLIC ARMCM33_BASE)
-target_compile_definitions(ARMCM33 PUBLIC ARMCM33)
-target_compile_options(ARMCM33
+target_compile_definitions(${CPU_TARGET} PUBLIC ARMCM33)
+target_compile_options(${CPU_TARGET}
     PRIVATE 
         -Wno-int-to-pointer-cast
         -Wno-pointer-to-int-cast
@@ -334,54 +305,83 @@ target_compile_options(ARMCM33
 )
 
 
-add_library(ARMCM33_DSP_FP)
-
-# TODO: FIX THE EXPORT SET DEPENDENCIES ON THE INTERFACE TARGETS.
-#list(APPEND CMSIS_CORTEX_BRINGUP_TARGETS ARMCM33_DSP_FP)
-target_link_libraries(ARMCM33_DSP_FP PUBLIC ARMCM33_BASE)
-target_compile_definitions(ARMCM33_DSP_FP 
+set(CPU_TARGET ARMCM33_DSP_FP)
+set(CPU_CMSIS_DIR ARMCM33)
+add_library(${CPU_TARGET})
+list(APPEND CMSIS_CORTEX_BRINGUP_TARGETS ${CPU_TARGET})
+target_include_directories(${CPU_TARGET}
     PUBLIC 
-        ARMCM33_DSP_FP
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/${CPU_CMSIS_DIR}/Include>
+        $<INSTALL_INTERFACE:CMSIS/Device/ARM/${CPU_CMSIS_DIR}/Include>
+    PRIVATE
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/Core/Include>
+        $<INSTALL_INTERFACE:CMSIS/Core/Include>
 )
-target_compile_options(ARMCM33_DSP_FP
+target_sources(${CPU_TARGET} 
+    PRIVATE
+        Device/ARM/${CPU_CMSIS_DIR}/Source/startup_${CPU_CMSIS_DIR}.c
+        Device/ARM/${CPU_CMSIS_DIR}/Source/system_${CPU_CMSIS_DIR}.c
+)
+target_compile_definitions(${CPU_TARGET} PUBLIC ARMCM33_DSP_FP)
+target_compile_options(${CPU_TARGET}
     PRIVATE 
         -Wno-int-to-pointer-cast
         -Wno-pointer-to-int-cast
     PUBLIC
         -mthumb
         -mcpu=cortex-m33
-        -march=armv8-m.main+dsp+fp
+        -march=armv8-m.main # THE nodsp and nofp parts are IMPORTANT
 )
 
-#TODO: Need to add support for ARMCM33_TZ_DSP AND ARMCM33_DSP_FP_TZ
-
-#[[
-
-add_library(ARMCM35P INTERFACE)
 
 
-
-add_library(ARMCM35P_DSP)
-list(APPEND CMSIS_CORTEX_BRINGUP_TARGETS ARMCM35P_DSP)
-target_include_directories(ARMCM35P_DSP
+set(CPU_TARGET ARMCM35P)
+set(CPU_CMSIS_DIR ARMCM35P)
+add_library(${CPU_TARGET})
+list(APPEND CMSIS_CORTEX_BRINGUP_TARGETS ${CPU_TARGET})
+target_include_directories(${CPU_TARGET}
     PUBLIC 
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/ARMCM35P/Include>
-        $<INSTALL_INTERFACE:CMSIS/Device/ARM/ARMCM35P/Include>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/${CPU_CMSIS_DIR}/Include>
+        $<INSTALL_INTERFACE:CMSIS/Device/ARM/${CPU_CMSIS_DIR}/Include>
     PRIVATE
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/Core/Include>
         $<INSTALL_INTERFACE:CMSIS/Core/Include>
 )
-target_sources(ARMCM35P_DSP 
+target_sources(${CPU_TARGET} 
     PRIVATE
-        Device/ARM/ARMCM35P/Source/startup_ARMCM35P.c
-        Device/ARM/ARMCM35P/Source/system_ARMCM35P.c
+        Device/ARM/${CPU_CMSIS_DIR}/Source/startup_${CPU_CMSIS_DIR}.c
+        Device/ARM/${CPU_CMSIS_DIR}/Source/system_${CPU_CMSIS_DIR}.c
 )
-target_compile_definitions(ARMCM35P_DSP 
+target_compile_definitions(${CPU_TARGET} PUBLIC ARMCM35P)
+target_compile_options(${CPU_TARGET}
+    PRIVATE 
+        -Wno-int-to-pointer-cast
+        -Wno-pointer-to-int-cast
+    PUBLIC
+        -mthumb
+        -mcpu=cortex-m35p+nodsp+nofp
+)
+
+
+set(CPU_TARGET ARMCM35P_DSP_FP)
+set(CPU_CMSIS_DIR ARMCM35P)
+add_library(${CPU_TARGET})
+list(APPEND CMSIS_CORTEX_BRINGUP_TARGETS ${CPU_TARGET})
+target_include_directories(${CPU_TARGET}
     PUBLIC 
-        ARMCM35P_DSP_FP=1
-        __DSP_PRESENT=1
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/${CPU_CMSIS_DIR}/Include>
+        $<INSTALL_INTERFACE:CMSIS/Device/ARM/${CPU_CMSIS_DIR}/Include>
+    PRIVATE
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/Core/Include>
+        $<INSTALL_INTERFACE:CMSIS/Core/Include>
 )
-target_compile_options(ARMCM35P_DSP
+target_sources(${CPU_TARGET} 
+    PRIVATE
+        Device/ARM/${CPU_CMSIS_DIR}/Source/startup_${CPU_CMSIS_DIR}.c
+        Device/ARM/${CPU_CMSIS_DIR}/Source/system_${CPU_CMSIS_DIR}.c
+)
+target_compile_definitions(${CPU_TARGET} PUBLIC ARMCM35P_DSP_FP)
+target_compile_options(${CPU_TARGET}
     PRIVATE 
         -Wno-int-to-pointer-cast
         -Wno-pointer-to-int-cast
@@ -389,7 +389,8 @@ target_compile_options(ARMCM35P_DSP
         -mthumb
         -mcpu=cortex-m35p
 )
-#]]
+
+
 
 
 #[[
