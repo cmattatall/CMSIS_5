@@ -5,6 +5,7 @@ project(CMSIS
     LANGUAGES C ASM
 )
 
+
 set(CMSIS_CORTEX_BRINGUP_TARGETS "") # empty list
 
 add_library(ARMCM0)
@@ -23,7 +24,14 @@ target_sources(ARMCM0
         Device/ARM/ARMCM0/Source/system_ARMCM0.c
 )
 target_compile_definitions(ARMCM0 PUBLIC ARMCM0)
-
+target_compile_options(ARMCM0 
+    PRIVATE 
+        -Wno-int-to-pointer-cast
+        -Wno-pointer-to-int-cast
+    PUBLIC
+        -mthumb
+        -mcpu=cortex-m0
+)
 
 
 add_library(ARMCM0plus)
@@ -42,6 +50,14 @@ target_sources(ARMCM0plus
         Device/ARM/ARMCM0plus/Source/system_ARMCM0plus.c
 )
 target_compile_definitions(ARMCM0plus PUBLIC ARMCM0P)
+target_compile_options(ARMCM0plus
+    PRIVATE 
+        -Wno-int-to-pointer-cast
+        -Wno-pointer-to-int-cast
+    PUBLIC
+        -mthumb
+        -mcpu=cortex-m0plus
+)
 
 
 add_library(ARMCM0plusMpu)
@@ -60,7 +76,14 @@ target_sources(ARMCM0plusMpu
         Device/ARM/ARMCM0plus/Source/system_ARMCM0plus.c
 )
 target_compile_definitions(ARMCM0plusMpu PUBLIC ARMCM0P_MPU)
-
+target_compile_options(ARMCM0plusMpu 
+    PRIVATE 
+        -Wno-int-to-pointer-cast
+        -Wno-pointer-to-int-cast
+    PUBLIC
+        -mthumb
+        -mcpu=cortex-m0plus
+)
 
 add_library(ARMCM1)
 list(APPEND CMSIS_CORTEX_BRINGUP_TARGETS ARMCM1)
@@ -78,7 +101,14 @@ target_sources(ARMCM1
         Device/ARM/ARMCM1/Source/system_ARMCM1.c
 )
 target_compile_definitions(ARMCM1 PUBLIC ARMCM1)
-
+target_compile_options(ARMCM1 
+    PRIVATE 
+        -Wno-int-to-pointer-cast
+        -Wno-pointer-to-int-cast
+    PUBLIC
+        -mthumb
+        -mcpu=cortex-m1
+)
 
 add_library(ARMCM3)
 list(APPEND CMSIS_CORTEX_BRINGUP_TARGETS ARMCM3)
@@ -96,6 +126,14 @@ target_sources(ARMCM3
         Device/ARM/ARMCM3/Source/system_ARMCM3.c
 )
 target_compile_definitions(ARMCM3 PUBLIC ARMCM3)
+target_compile_options(ARMCM3
+    PRIVATE 
+        -Wno-int-to-pointer-cast
+        -Wno-pointer-to-int-cast
+    PUBLIC
+        -mthumb
+        -mcpu=cortex-m3
+)
 
 
 add_library(ARMCM4)
@@ -114,40 +152,294 @@ target_sources(ARMCM4
         Device/ARM/ARMCM4/Source/system_ARMCM4.c
 )
 target_compile_definitions(ARMCM4 PUBLIC ARMCM4)
+target_compile_options(ARMCM4
+    PRIVATE 
+        -Wno-int-to-pointer-cast
+        -Wno-pointer-to-int-cast
+    PUBLIC
+        -mthumb
+        -mcpu=cortex-m4
+)
 
 
-add_library(ARMCM7)
-list(APPEND CMSIS_CORTEX_BRINGUP_TARGETS ARMCM7)
-target_include_directories(ARMCM7
+add_library(ARMCM4_SOFT_FP)
+list(APPEND CMSIS_CORTEX_BRINGUP_TARGETS ARMCM4_SOFT_FP)
+target_include_directories(ARMCM4_SOFT_FP 
     PUBLIC 
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/ARMCM7/Include>
-        $<INSTALL_INTERFACE:CMSIS/Device/ARM/ARMCM7/Include>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/ARMCM4/Include>
+        $<INSTALL_INTERFACE:CMSIS/Device/ARM/ARMCM4/Include>
     PRIVATE
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/Core/Include>
         $<INSTALL_INTERFACE:CMSIS/Core/Include>
 )
-target_sources(ARMCM7 
+target_sources(ARMCM4_SOFT_FP 
     PRIVATE
-        Device/ARM/ARMCM7/Source/startup_ARMCM7.c
-        Device/ARM/ARMCM7/Source/system_ARMCM7.c
+        Device/ARM/ARMCM4/Source/startup_ARMCM4.c
+        Device/ARM/ARMCM4/Source/system_ARMCM4.c
 )
-target_compile_definitions(ARMCM7 PUBLIC ARMCM7)
+target_compile_definitions(ARMCM4_SOFT_FP PUBLIC ARMCM4_FP)
+target_compile_options(ARMCM4_SOFT_FP
+    PRIVATE 
+        -Wno-int-to-pointer-cast
+        -Wno-pointer-to-int-cast
+    PUBLIC
+        -mthumb
+        -mcpu=cortex-m4
+        -mfloat-abi=softfp
+        -mfpu=fpv4-sp-d16
+)
 
 
-include(GNUInstallDirs)
-set(INSTALL_CONFIGDIR ${CMAKE_INSTALL_LIBDIR}/cmake/CMSIS)
+add_library(ARMCM4_HARD_FP)
+list(APPEND CMSIS_CORTEX_BRINGUP_TARGETS ARMCM4_HARD_FP)
+target_include_directories(ARMCM4_HARD_FP 
+    PUBLIC 
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/ARMCM4/Include>
+        $<INSTALL_INTERFACE:CMSIS/Device/ARM/ARMCM4/Include>
+    PRIVATE
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/Core/Include>
+        $<INSTALL_INTERFACE:CMSIS/Core/Include>
+)
+target_sources(ARMCM4_HARD_FP 
+    PRIVATE
+        Device/ARM/ARMCM4/Source/startup_ARMCM4.c
+        Device/ARM/ARMCM4/Source/system_ARMCM4.c
+)
+target_compile_definitions(ARMCM4_HARD_FP PUBLIC ARMCM4_FP)
+target_compile_options(ARMCM4_HARD_FP
+    PRIVATE 
+        -Wno-int-to-pointer-cast
+        -Wno-pointer-to-int-cast
+    PUBLIC
+        -mthumb
+        -mcpu=cortex-m4
+        -mfloat-abi=hard
+        -mfpu=fpv4-sp-d16
+)
+
+
+set(CPU_TARGET ARMCM7)
+set(CPU_CMSIS_DIR ARMCM7)
+add_library(${CPU_TARGET})
+list(APPEND CMSIS_CORTEX_BRINGUP_TARGETS ${CPU_TARGET})
+target_include_directories(${CPU_TARGET}
+    PUBLIC 
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/${CPU_CMSIS_DIR}/Include>
+        $<INSTALL_INTERFACE:CMSIS/Device/ARM/${CPU_CMSIS_DIR}/Include>
+    PRIVATE
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/Core/Include>
+        $<INSTALL_INTERFACE:CMSIS/Core/Include>
+)
+target_sources(${CPU_TARGET} 
+    PRIVATE
+        Device/ARM/${CPU_CMSIS_DIR}/Source/startup_${CPU_CMSIS_DIR}.c
+        Device/ARM/${CPU_CMSIS_DIR}/Source/system_${CPU_CMSIS_DIR}.c
+)
+target_compile_definitions(${CPU_TARGET} PUBLIC ARMCM7)
+target_compile_options(${CPU_TARGET}
+    PRIVATE 
+        -Wno-int-to-pointer-cast
+        -Wno-pointer-to-int-cast
+    PUBLIC
+        -mthumb
+        -mcpu=cortex-m7
+        -march=armv7e-m
+)
+
+
+set(CPU_TARGET ARMCM23)
+set(CPU_CMSIS_DIR ARMCM23)
+add_library(${CPU_TARGET})
+list(APPEND CMSIS_CORTEX_BRINGUP_TARGETS ${CPU_TARGET})
+target_include_directories(${CPU_TARGET}
+    PUBLIC 
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/${CPU_CMSIS_DIR}/Include>
+        $<INSTALL_INTERFACE:CMSIS/Device/ARM/${CPU_CMSIS_DIR}/Include>
+    PRIVATE
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/Core/Include>
+        $<INSTALL_INTERFACE:CMSIS/Core/Include>
+)
+target_sources(${CPU_TARGET} 
+    PRIVATE
+        Device/ARM/${CPU_CMSIS_DIR}/Source/startup_${CPU_CMSIS_DIR}.c
+        Device/ARM/${CPU_CMSIS_DIR}/Source/system_${CPU_CMSIS_DIR}.c
+)
+target_compile_definitions(${CPU_TARGET} PUBLIC ARMCM23)
+target_compile_options(${CPU_TARGET}
+    PRIVATE 
+        -Wno-int-to-pointer-cast
+        -Wno-pointer-to-int-cast
+    PUBLIC
+        -mthumb
+        -mcpu=cortex-m23
+)
+
+
+
+set(CPU_TARGET ARMCM33)
+set(CPU_CMSIS_DIR ARMCM33)
+add_library(${CPU_TARGET})
+list(APPEND CMSIS_CORTEX_BRINGUP_TARGETS ${CPU_TARGET})
+target_include_directories(${CPU_TARGET}
+    PUBLIC 
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/${CPU_CMSIS_DIR}/Include>
+        $<INSTALL_INTERFACE:CMSIS/Device/ARM/${CPU_CMSIS_DIR}/Include>
+    PRIVATE
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/Core/Include>
+        $<INSTALL_INTERFACE:CMSIS/Core/Include>
+)
+target_sources(${CPU_TARGET} 
+    PRIVATE
+        Device/ARM/${CPU_CMSIS_DIR}/Source/startup_${CPU_CMSIS_DIR}.c
+        Device/ARM/${CPU_CMSIS_DIR}/Source/system_${CPU_CMSIS_DIR}.c
+)
+target_compile_definitions(${CPU_TARGET} PUBLIC ARMCM33)
+target_compile_options(${CPU_TARGET}
+    PRIVATE 
+        -Wno-int-to-pointer-cast
+        -Wno-pointer-to-int-cast
+    PUBLIC
+        -mthumb
+        -mcpu=cortex-m33
+        -march=armv8-m.main+nodsp+nofp # THE nodsp and nofp parts are IMPORTANT
+)
+
+
+set(CPU_TARGET ARMCM33_DSP_FP)
+set(CPU_CMSIS_DIR ARMCM33)
+add_library(${CPU_TARGET})
+list(APPEND CMSIS_CORTEX_BRINGUP_TARGETS ${CPU_TARGET})
+target_include_directories(${CPU_TARGET}
+    PUBLIC 
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/${CPU_CMSIS_DIR}/Include>
+        $<INSTALL_INTERFACE:CMSIS/Device/ARM/${CPU_CMSIS_DIR}/Include>
+    PRIVATE
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/Core/Include>
+        $<INSTALL_INTERFACE:CMSIS/Core/Include>
+)
+target_sources(${CPU_TARGET} 
+    PRIVATE
+        Device/ARM/${CPU_CMSIS_DIR}/Source/startup_${CPU_CMSIS_DIR}.c
+        Device/ARM/${CPU_CMSIS_DIR}/Source/system_${CPU_CMSIS_DIR}.c
+)
+target_compile_definitions(${CPU_TARGET} PUBLIC ARMCM33_DSP_FP)
+target_compile_options(${CPU_TARGET}
+    PRIVATE 
+        -Wno-int-to-pointer-cast
+        -Wno-pointer-to-int-cast
+    PUBLIC
+        -mthumb
+        -mcpu=cortex-m33
+        -march=armv8-m.main # THE nodsp and nofp parts are IMPORTANT
+)
+
+
+
+set(CPU_TARGET ARMCM35P)
+set(CPU_CMSIS_DIR ARMCM35P)
+add_library(${CPU_TARGET})
+list(APPEND CMSIS_CORTEX_BRINGUP_TARGETS ${CPU_TARGET})
+target_include_directories(${CPU_TARGET}
+    PUBLIC 
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/${CPU_CMSIS_DIR}/Include>
+        $<INSTALL_INTERFACE:CMSIS/Device/ARM/${CPU_CMSIS_DIR}/Include>
+    PRIVATE
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/Core/Include>
+        $<INSTALL_INTERFACE:CMSIS/Core/Include>
+)
+target_sources(${CPU_TARGET} 
+    PRIVATE
+        Device/ARM/${CPU_CMSIS_DIR}/Source/startup_${CPU_CMSIS_DIR}.c
+        Device/ARM/${CPU_CMSIS_DIR}/Source/system_${CPU_CMSIS_DIR}.c
+)
+target_compile_definitions(${CPU_TARGET} PUBLIC ARMCM35P)
+target_compile_options(${CPU_TARGET}
+    PRIVATE 
+        -Wno-int-to-pointer-cast
+        -Wno-pointer-to-int-cast
+    PUBLIC
+        -mthumb
+        -mcpu=cortex-m35p+nodsp+nofp
+)
+
+
+set(CPU_TARGET ARMCM35P_DSP_FP)
+set(CPU_CMSIS_DIR ARMCM35P)
+add_library(${CPU_TARGET})
+list(APPEND CMSIS_CORTEX_BRINGUP_TARGETS ${CPU_TARGET})
+target_include_directories(${CPU_TARGET}
+    PUBLIC 
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/${CPU_CMSIS_DIR}/Include>
+        $<INSTALL_INTERFACE:CMSIS/Device/ARM/${CPU_CMSIS_DIR}/Include>
+    PRIVATE
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/Core/Include>
+        $<INSTALL_INTERFACE:CMSIS/Core/Include>
+)
+target_sources(${CPU_TARGET} 
+    PRIVATE
+        Device/ARM/${CPU_CMSIS_DIR}/Source/startup_${CPU_CMSIS_DIR}.c
+        Device/ARM/${CPU_CMSIS_DIR}/Source/system_${CPU_CMSIS_DIR}.c
+)
+target_compile_definitions(${CPU_TARGET} PUBLIC ARMCM35P_DSP_FP)
+target_compile_options(${CPU_TARGET}
+    PRIVATE 
+        -Wno-int-to-pointer-cast
+        -Wno-pointer-to-int-cast
+    PUBLIC
+        -mthumb
+        -mcpu=cortex-m35p
+)
+
+
+add_library(ARMCM55)
+list(APPEND CMSIS_CORTEX_BRINGUP_TARGETS ARMCM55)
+target_include_directories(ARMCM55
+    PUBLIC 
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/ARMCM55/Include>
+        $<INSTALL_INTERFACE:CMSIS/Device/ARM/ARMCM55/Include>
+    PRIVATE
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/Core/Include>
+        $<INSTALL_INTERFACE:CMSIS/Core/Include>
+)
+target_sources(ARMCM55 
+    PRIVATE
+        Device/ARM/ARMCM55/Source/startup_ARMCM55.c
+        Device/ARM/ARMCM55/Source/system_ARMCM55.c
+)
+target_compile_definitions(ARMCM55 PUBLIC ARMCM55)
+target_compile_options(ARMCM55
+    PRIVATE 
+        -Wno-int-to-pointer-cast
+        -Wno-pointer-to-int-cast
+    PUBLIC
+        -mthumb
+        -mcpu=cortex-m55 # seems that not all versions of arm-none-eabi-gcc toolchain support this flag for mcpu
+        -mfpu=fpv5-sp-d16
+)
+
+
+if(NOT CPACK_PACKAGING_INSTALL_PREFIX)
+    set(CPACK_PACKAGING_INSTALL_PREFIX ${PROJECT_SOURCE_DIR}/install/)
+endif(NOT CPACK_PACKAGING_INSTALL_PREFIX)
+
+
+set(INSTALL_LIBDIR lib)
+set(INSTALL_INCLUDEDIR include)
+set(INSTALL_BINDIR bin)
+
+set(INSTALL_CONFIGDIR ${INSTALL_LIBDIR}/cmake/CMSIS)
 
 install(
     TARGETS     ${CMSIS_CORTEX_BRINGUP_TARGETS}
     EXPORT      CMSIS
-    LIBRARY     DESTINATION ${CMAKE_INSTALL_LIBDIR}/CMSIS/
-    ARCHIVE     DESTINATION ${CMAKE_INSTALL_LIBDIR}/CMSIS/
+    LIBRARY     DESTINATION ${INSTALL_LIBDIR}/CMSIS/
+    ARCHIVE     DESTINATION ${INSTALL_LIBDIR}/CMSIS/
     COMPONENT   lib
 )
 
 install(
     DIRECTORY       ${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/Core/Include/
-    DESTINATION     ${CMAKE_INSTALL_INCLUDEDIR}/CMSIS/Core/
+    DESTINATION     ${INSTALL_INCLUDEDIR}/CMSIS/Core/
     FILES_MATCHING  PATTERN "*.h"
 )
 
@@ -157,24 +449,23 @@ foreach(DIR ${DEVICE_IDIRS})
     get_filename_component(DEVICE ${DEVICE_PATH} NAME)
     install(
         DIRECTORY       ${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/${DEVICE}/Include/
-        DESTINATION     ${CMAKE_INSTALL_INCLUDEDIR}/CMSIS/Device/${DEVICE}/
+        DESTINATION     ${INSTALL_INCLUDEDIR}/CMSIS/Device/${DEVICE}/
         FILES_MATCHING  PATTERN "*.h"
     )
 
     install(
         DIRECTORY       ${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/${DEVICE}/Config/
-        DESTINATION     ${CMAKE_INSTALL_INCLUDEDIR}/CMSIS/Device/${DEVICE}/
+        DESTINATION     ${INSTALL_INCLUDEDIR}/CMSIS/Device/${DEVICE}/
         FILES_MATCHING  PATTERN "*.h"
     )
 
     install(
         DIRECTORY       ${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/${DEVICE}/Source/GCC/
-        DESTINATION     ${CMAKE_INSTALL_INCLUDEDIR}/CMSIS/Device/${DEVICE}/
+        DESTINATION     ${INSTALL_INCLUDEDIR}/CMSIS/Device/${DEVICE}/
         FILES_MATCHING  PATTERN "*.ld"
     )
 
 endforeach(DIR ${DEVICE_IDIRS})
-
 
 
 install(
@@ -238,8 +529,8 @@ file(WRITE
     ${CMAKE_CURRENT_BINARY_DIR}/tmp/postinst
     "#!/bin/bash\n                                                                                        \
     ldconfig\n                                                                                            \
-    chown $(whoami):$(whoami) -R ${CPACK_PACKAGING_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/CMSIS\n    \
-    chown $(whoami):$(whoami) -R ${CPACK_PACKAGING_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/CMSIS\n        \  
+    chown $(whoami):$(whoami) -R ${CPACK_PACKAGING_INSTALL_PREFIX}/${INSTALL_INCLUDEDIR}/CMSIS\n    \
+    chown $(whoami):$(whoami) -R ${CPACK_PACKAGING_INSTALL_PREFIX}/${INSTALL_LIBDIR}/CMSIS\n        \  
     "
 )
 
