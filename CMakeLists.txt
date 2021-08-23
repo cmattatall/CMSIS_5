@@ -391,9 +391,6 @@ target_compile_options(${CPU_TARGET}
 )
 
 
-
-
-#[[
 add_library(ARMCM55)
 list(APPEND CMSIS_CORTEX_BRINGUP_TARGETS ARMCM55)
 target_include_directories(ARMCM55
@@ -419,14 +416,6 @@ target_compile_options(ARMCM55
         -mcpu=cortex-m55 # seems that not all versions of arm-none-eabi-gcc toolchain support this flag for mcpu
         -mfpu=fpv5-sp-d16
 )
-#]]
-
-
-
-
-
-
-
 
 
 if(NOT CPACK_PACKAGING_INSTALL_PREFIX)
