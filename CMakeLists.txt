@@ -573,15 +573,9 @@ message(STATUS
 
 include(CPack)
 
-function(CMSIS_get_targets output_var)
-    set(${output_var} ${CMSIS_CORTEX_TARGETS} PARENT_SCOPE)
-endfunction(CMSIS_get_targets output_var)
 
-
-function(CMSIS_list_targets)
-    message("Listing cmsis targets ...")
-    foreach(target ${CMSIS_CORTEX_TARGETS})
-        message(" - ${target}")
-    endforeach(target ${CMSIS_CORTEX_TARGETS})
-    message("")
-endfunction(CMSIS_list_targets)
+message("Listing CMSIS targets ...")
+foreach(target ${CMSIS_CORTEX_TARGETS})
+    message(" - ${target}")
+endforeach(target ${CMSIS_CORTEX_TARGETS})
+message("")
