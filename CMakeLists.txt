@@ -8,23 +8,23 @@ project(CMSIS
 
 set(CMSIS_CORTEX_TARGETS "") # empty list
 
-add_library(ARMCM0 INTERFACE)
+add_library(ARMCM0)
 list(APPEND CMSIS_CORTEX_TARGETS ARMCM0)
 target_include_directories(ARMCM0 
-    INTERFACE 
+    PUBLIC 
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/ARMCM0/Include>
         $<INSTALL_INTERFACE:CMSIS/Device/ARM/ARMCM0/Include>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/Core/Include>
         $<INSTALL_INTERFACE:CMSIS/Core/Include>
 )
 target_sources(ARMCM0 
-    INTERFACE
+    PUBLIC
         Device/ARM/ARMCM0/Source/startup_ARMCM0.c
         Device/ARM/ARMCM0/Source/system_ARMCM0.c
 )
-target_compile_definitions(ARMCM0 INTERFACE ARMCM0)
+target_compile_definitions(ARMCM0 PUBLIC ARMCM0)
 target_compile_options(ARMCM0 
-    INTERFACE 
+    PUBLIC 
         -Wno-int-to-pointer-cast
         -Wno-pointer-to-int-cast
         -mthumb
@@ -32,23 +32,23 @@ target_compile_options(ARMCM0
 )
 
 
-add_library(ARMCM0plus INTERFACE)
+add_library(ARMCM0plus)
 list(APPEND CMSIS_CORTEX_TARGETS ARMCM0plus)
 target_include_directories(ARMCM0plus 
-    INTERFACE 
+    PUBLIC 
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/ARMCM0plus/Include>
         $<INSTALL_INTERFACE:CMSIS/Device/ARM/ARMCM0plus/Include>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/Core/Include>
         $<INSTALL_INTERFACE:CMSIS/Core/Include>
 )
 target_sources(ARMCM0plus 
-    INTERFACE
+    PUBLIC
         Device/ARM/ARMCM0plus/Source/startup_ARMCM0plus.c
         Device/ARM/ARMCM0plus/Source/system_ARMCM0plus.c
 )
-target_compile_definitions(ARMCM0plus INTERFACE ARMCM0P)
+target_compile_definitions(ARMCM0plus PUBLIC ARMCM0P)
 target_compile_options(ARMCM0plus
-    INTERFACE 
+    PUBLIC 
         -Wno-int-to-pointer-cast
         -Wno-pointer-to-int-cast
         -mthumb
@@ -56,69 +56,69 @@ target_compile_options(ARMCM0plus
 )
 
 
-add_library(ARMCM0plusMpu INTERFACE)
+add_library(ARMCM0plusMpu)
 list(APPEND CMSIS_CORTEX_TARGETS ARMCM0plusMpu)
 target_include_directories(ARMCM0plusMpu
-    INTERFACE 
+    PUBLIC 
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/ARMCM0plus/Include>
         $<INSTALL_INTERFACE:CMSIS/Device/ARM/ARMCM0plus/Include>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/Core/Include>
         $<INSTALL_INTERFACE:CMSIS/Core/Include>
 )
 target_sources(ARMCM0plusMpu 
-    INTERFACE
+    PUBLIC
         Device/ARM/ARMCM0plus/Source/startup_ARMCM0plus.c
         Device/ARM/ARMCM0plus/Source/system_ARMCM0plus.c
 )
-target_compile_definitions(ARMCM0plusMpu INTERFACE ARMCM0P_MPU)
+target_compile_definitions(ARMCM0plusMpu PUBLIC ARMCM0P_MPU)
 target_compile_options(ARMCM0plusMpu 
-    INTERFACE 
+    PUBLIC 
         -Wno-int-to-pointer-cast
         -Wno-pointer-to-int-cast
         -mthumb
         -mcpu=cortex-m0plus
 )
 
-add_library(ARMCM1 INTERFACE)
+add_library(ARMCM1)
 list(APPEND CMSIS_CORTEX_TARGETS ARMCM1)
 target_include_directories(ARMCM1 
-    INTERFACE 
+    PUBLIC 
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/ARMCM1/Include>
         $<INSTALL_INTERFACE:CMSIS/Device/ARM/ARMCM1/Include>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/Core/Include>
         $<INSTALL_INTERFACE:CMSIS/Core/Include>
 )
 target_sources(ARMCM1 
-    INTERFACE
+    PUBLIC
         Device/ARM/ARMCM1/Source/startup_ARMCM1.c
         Device/ARM/ARMCM1/Source/system_ARMCM1.c
 )
-target_compile_definitions(ARMCM1 INTERFACE ARMCM1)
+target_compile_definitions(ARMCM1 PUBLIC ARMCM1)
 target_compile_options(ARMCM1 
-    INTERFACE 
+    PUBLIC 
         -Wno-int-to-pointer-cast
         -Wno-pointer-to-int-cast
         -mthumb
         -mcpu=cortex-m1
 )
 
-add_library(ARMCM3 INTERFACE)
+add_library(ARMCM3)
 list(APPEND CMSIS_CORTEX_TARGETS ARMCM3)
 target_include_directories(ARMCM3 
-    INTERFACE 
+    PUBLIC 
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/ARMCM3/Include>
         $<INSTALL_INTERFACE:CMSIS/Device/ARM/ARMCM3/Include>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/Core/Include>
         $<INSTALL_INTERFACE:CMSIS/Core/Include>
 )
 target_sources(ARMCM3 
-    INTERFACE
+    PUBLIC
         Device/ARM/ARMCM3/Source/startup_ARMCM3.c
         Device/ARM/ARMCM3/Source/system_ARMCM3.c
 )
-target_compile_definitions(ARMCM3 INTERFACE ARMCM3)
+target_compile_definitions(ARMCM3 PUBLIC ARMCM3)
 target_compile_options(ARMCM3
-    INTERFACE 
+    PUBLIC 
         -Wno-int-to-pointer-cast
         -Wno-pointer-to-int-cast
         -mthumb
@@ -126,23 +126,23 @@ target_compile_options(ARMCM3
 )
 
 
-add_library(ARMCM4 INTERFACE)
+add_library(ARMCM4)
 list(APPEND CMSIS_CORTEX_TARGETS ARMCM4)
 target_include_directories(ARMCM4 
-    INTERFACE 
+    PUBLIC 
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/ARMCM4/Include>
         $<INSTALL_INTERFACE:CMSIS/Device/ARM/ARMCM4/Include>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/Core/Include>
         $<INSTALL_INTERFACE:CMSIS/Core/Include>
 )
 target_sources(ARMCM4 
-    INTERFACE
+    PUBLIC
         Device/ARM/ARMCM4/Source/startup_ARMCM4.c
         Device/ARM/ARMCM4/Source/system_ARMCM4.c
 )
-target_compile_definitions(ARMCM4 INTERFACE ARMCM4)
+target_compile_definitions(ARMCM4 PUBLIC ARMCM4)
 target_compile_options(ARMCM4
-    INTERFACE 
+    PUBLIC 
         -Wno-int-to-pointer-cast
         -Wno-pointer-to-int-cast
         -mthumb
@@ -150,23 +150,23 @@ target_compile_options(ARMCM4
 )
 
 
-add_library(ARMCM4_SOFT_FP INTERFACE)
+add_library(ARMCM4_SOFT_FP)
 list(APPEND CMSIS_CORTEX_TARGETS ARMCM4_SOFT_FP)
 target_include_directories(ARMCM4_SOFT_FP 
-    INTERFACE 
+    PUBLIC 
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/ARMCM4/Include>
         $<INSTALL_INTERFACE:CMSIS/Device/ARM/ARMCM4/Include>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/Core/Include>
         $<INSTALL_INTERFACE:CMSIS/Core/Include>
 )
 target_sources(ARMCM4_SOFT_FP 
-    INTERFACE
+    PUBLIC
         Device/ARM/ARMCM4/Source/startup_ARMCM4.c
         Device/ARM/ARMCM4/Source/system_ARMCM4.c
 )
-target_compile_definitions(ARMCM4_SOFT_FP INTERFACE ARMCM4_FP)
+target_compile_definitions(ARMCM4_SOFT_FP PUBLIC ARMCM4_FP)
 target_compile_options(ARMCM4_SOFT_FP
-    INTERFACE 
+    PUBLIC 
         -Wno-int-to-pointer-cast
         -Wno-pointer-to-int-cast
         -mthumb
@@ -176,23 +176,23 @@ target_compile_options(ARMCM4_SOFT_FP
 )
 
 
-add_library(ARMCM4_HARD_FP INTERFACE)
+add_library(ARMCM4_HARD_FP)
 list(APPEND CMSIS_CORTEX_TARGETS ARMCM4_HARD_FP)
 target_include_directories(ARMCM4_HARD_FP 
-    INTERFACE 
+    PUBLIC 
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/ARMCM4/Include>
         $<INSTALL_INTERFACE:CMSIS/Device/ARM/ARMCM4/Include>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/Core/Include>
         $<INSTALL_INTERFACE:CMSIS/Core/Include>
 )
 target_sources(ARMCM4_HARD_FP 
-    INTERFACE
+    PUBLIC
         Device/ARM/ARMCM4/Source/startup_ARMCM4.c
         Device/ARM/ARMCM4/Source/system_ARMCM4.c
 )
-target_compile_definitions(ARMCM4_HARD_FP INTERFACE ARMCM4_FP)
+target_compile_definitions(ARMCM4_HARD_FP PUBLIC ARMCM4_FP)
 target_compile_options(ARMCM4_HARD_FP
-    INTERFACE 
+    PUBLIC 
         -Wno-int-to-pointer-cast
         -Wno-pointer-to-int-cast
         -mthumb
@@ -204,23 +204,23 @@ target_compile_options(ARMCM4_HARD_FP
 
 set(CPU_TARGET ARMCM7)
 set(CPU_CMSIS_DIR ARMCM7)
-add_library(${CPU_TARGET} INTERFACE)
+add_library(${CPU_TARGET})
 list(APPEND CMSIS_CORTEX_TARGETS ${CPU_TARGET})
 target_include_directories(${CPU_TARGET}
-    INTERFACE 
+    PUBLIC 
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/${CPU_CMSIS_DIR}/Include>
         $<INSTALL_INTERFACE:CMSIS/Device/ARM/${CPU_CMSIS_DIR}/Include>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/Core/Include>
         $<INSTALL_INTERFACE:CMSIS/Core/Include>
 )
 target_sources(${CPU_TARGET} 
-    INTERFACE
+    PUBLIC
         Device/ARM/${CPU_CMSIS_DIR}/Source/startup_${CPU_CMSIS_DIR}.c
         Device/ARM/${CPU_CMSIS_DIR}/Source/system_${CPU_CMSIS_DIR}.c
 )
-target_compile_definitions(${CPU_TARGET} INTERFACE ARMCM7)
+target_compile_definitions(${CPU_TARGET} PUBLIC ARMCM7)
 target_compile_options(${CPU_TARGET}
-    INTERFACE 
+    PUBLIC 
         -Wno-int-to-pointer-cast
         -Wno-pointer-to-int-cast
         -mthumb
@@ -231,23 +231,23 @@ target_compile_options(${CPU_TARGET}
 
 set(CPU_TARGET ARMCM23)
 set(CPU_CMSIS_DIR ARMCM23)
-add_library(${CPU_TARGET} INTERFACE)
+add_library(${CPU_TARGET})
 list(APPEND CMSIS_CORTEX_TARGETS ${CPU_TARGET})
 target_include_directories(${CPU_TARGET}
-    INTERFACE 
+    PUBLIC 
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/${CPU_CMSIS_DIR}/Include>
         $<INSTALL_INTERFACE:CMSIS/Device/ARM/${CPU_CMSIS_DIR}/Include>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/Core/Include>
         $<INSTALL_INTERFACE:CMSIS/Core/Include>
 )
 target_sources(${CPU_TARGET} 
-    INTERFACE
+    PUBLIC
         Device/ARM/${CPU_CMSIS_DIR}/Source/startup_${CPU_CMSIS_DIR}.c
         Device/ARM/${CPU_CMSIS_DIR}/Source/system_${CPU_CMSIS_DIR}.c
 )
-target_compile_definitions(${CPU_TARGET} INTERFACE ARMCM23)
+target_compile_definitions(${CPU_TARGET} PUBLIC ARMCM23)
 target_compile_options(${CPU_TARGET}
-    INTERFACE 
+    PUBLIC 
         -Wno-int-to-pointer-cast
         -Wno-pointer-to-int-cast
         -mthumb
@@ -258,23 +258,23 @@ target_compile_options(${CPU_TARGET}
 
 set(CPU_TARGET ARMCM33)
 set(CPU_CMSIS_DIR ARMCM33)
-add_library(${CPU_TARGET} INTERFACE)
+add_library(${CPU_TARGET})
 list(APPEND CMSIS_CORTEX_TARGETS ${CPU_TARGET})
 target_include_directories(${CPU_TARGET}
-    INTERFACE 
+    PUBLIC 
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/${CPU_CMSIS_DIR}/Include>
         $<INSTALL_INTERFACE:CMSIS/Device/ARM/${CPU_CMSIS_DIR}/Include>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/Core/Include>
         $<INSTALL_INTERFACE:CMSIS/Core/Include>
 )
 target_sources(${CPU_TARGET} 
-    INTERFACE
+    PUBLIC
         Device/ARM/${CPU_CMSIS_DIR}/Source/startup_${CPU_CMSIS_DIR}.c
         Device/ARM/${CPU_CMSIS_DIR}/Source/system_${CPU_CMSIS_DIR}.c
 )
-target_compile_definitions(${CPU_TARGET} INTERFACE ARMCM33)
+target_compile_definitions(${CPU_TARGET} PUBLIC ARMCM33)
 target_compile_options(${CPU_TARGET}
-    INTERFACE 
+    PUBLIC 
         -Wno-int-to-pointer-cast
         -Wno-pointer-to-int-cast
         -mthumb
@@ -285,23 +285,23 @@ target_compile_options(${CPU_TARGET}
 
 set(CPU_TARGET ARMCM33_DSP_FP)
 set(CPU_CMSIS_DIR ARMCM33)
-add_library(${CPU_TARGET} INTERFACE)
+add_library(${CPU_TARGET})
 list(APPEND CMSIS_CORTEX_TARGETS ${CPU_TARGET})
 target_include_directories(${CPU_TARGET}
-    INTERFACE 
+    PUBLIC 
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/${CPU_CMSIS_DIR}/Include>
         $<INSTALL_INTERFACE:CMSIS/Device/ARM/${CPU_CMSIS_DIR}/Include>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/Core/Include>
         $<INSTALL_INTERFACE:CMSIS/Core/Include>
 )
 target_sources(${CPU_TARGET} 
-    INTERFACE
+    PUBLIC
         Device/ARM/${CPU_CMSIS_DIR}/Source/startup_${CPU_CMSIS_DIR}.c
         Device/ARM/${CPU_CMSIS_DIR}/Source/system_${CPU_CMSIS_DIR}.c
 )
-target_compile_definitions(${CPU_TARGET} INTERFACE ARMCM33_DSP_FP)
+target_compile_definitions(${CPU_TARGET} PUBLIC ARMCM33_DSP_FP)
 target_compile_options(${CPU_TARGET}
-    INTERFACE 
+    PUBLIC 
         -Wno-int-to-pointer-cast
         -Wno-pointer-to-int-cast
         -mthumb
@@ -313,23 +313,23 @@ target_compile_options(${CPU_TARGET}
 
 set(CPU_TARGET ARMCM35P)
 set(CPU_CMSIS_DIR ARMCM35P)
-add_library(${CPU_TARGET} INTERFACE)
+add_library(${CPU_TARGET})
 list(APPEND CMSIS_CORTEX_TARGETS ${CPU_TARGET})
 target_include_directories(${CPU_TARGET}
-    INTERFACE 
+    PUBLIC 
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/${CPU_CMSIS_DIR}/Include>
         $<INSTALL_INTERFACE:CMSIS/Device/ARM/${CPU_CMSIS_DIR}/Include>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/Core/Include>
         $<INSTALL_INTERFACE:CMSIS/Core/Include>
 )
 target_sources(${CPU_TARGET} 
-    INTERFACE
+    PUBLIC
         Device/ARM/${CPU_CMSIS_DIR}/Source/startup_${CPU_CMSIS_DIR}.c
         Device/ARM/${CPU_CMSIS_DIR}/Source/system_${CPU_CMSIS_DIR}.c
 )
-target_compile_definitions(${CPU_TARGET} INTERFACE ARMCM35P)
+target_compile_definitions(${CPU_TARGET} PUBLIC ARMCM35P)
 target_compile_options(${CPU_TARGET}
-    INTERFACE 
+    PUBLIC 
         -Wno-int-to-pointer-cast
         -Wno-pointer-to-int-cast
         -mthumb
@@ -339,23 +339,23 @@ target_compile_options(${CPU_TARGET}
 
 set(CPU_TARGET ARMCM35P_DSP_FP)
 set(CPU_CMSIS_DIR ARMCM35P)
-add_library(${CPU_TARGET} INTERFACE)
+add_library(${CPU_TARGET})
 list(APPEND CMSIS_CORTEX_TARGETS ${CPU_TARGET})
 target_include_directories(${CPU_TARGET}
-    INTERFACE 
+    PUBLIC 
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/${CPU_CMSIS_DIR}/Include>
         $<INSTALL_INTERFACE:CMSIS/Device/ARM/${CPU_CMSIS_DIR}/Include>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/Core/Include>
         $<INSTALL_INTERFACE:CMSIS/Core/Include>
 )
 target_sources(${CPU_TARGET} 
-    INTERFACE
+    PUBLIC
         Device/ARM/${CPU_CMSIS_DIR}/Source/startup_${CPU_CMSIS_DIR}.c
         Device/ARM/${CPU_CMSIS_DIR}/Source/system_${CPU_CMSIS_DIR}.c
 )
-target_compile_definitions(${CPU_TARGET} INTERFACE ARMCM35P_DSP_FP)
+target_compile_definitions(${CPU_TARGET} PUBLIC ARMCM35P_DSP_FP)
 target_compile_options(${CPU_TARGET}
-    INTERFACE 
+    PUBLIC 
         -Wno-int-to-pointer-cast
         -Wno-pointer-to-int-cast
         -mthumb
@@ -363,23 +363,23 @@ target_compile_options(${CPU_TARGET}
 )
 
 
-add_library(ARMCM55 INTERFACE)
+add_library(ARMCM55)
 list(APPEND CMSIS_CORTEX_TARGETS ARMCM55)
 target_include_directories(ARMCM55
-    INTERFACE 
+    PUBLIC 
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/ARMCM55/Include>
         $<INSTALL_INTERFACE:CMSIS/Device/ARM/ARMCM55/Include>
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/CMSIS/Core/Include>
         $<INSTALL_INTERFACE:CMSIS/Core/Include>
 )
 target_sources(ARMCM55 
-    INTERFACE
+    PUBLIC
         Device/ARM/ARMCM55/Source/startup_ARMCM55.c
         Device/ARM/ARMCM55/Source/system_ARMCM55.c
 )
-target_compile_definitions(ARMCM55 INTERFACE ARMCM55)
+target_compile_definitions(ARMCM55 PUBLIC ARMCM55)
 target_compile_options(ARMCM55
-    INTERFACE 
+    PUBLIC 
         -Wno-int-to-pointer-cast
         -Wno-pointer-to-int-cast
         -mthumb
