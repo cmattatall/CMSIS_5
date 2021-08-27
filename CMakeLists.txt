@@ -24,9 +24,7 @@ target_sources(ARMCM0
 )
 target_compile_definitions(ARMCM0 INTERFACE ARMCM0)
 target_compile_options(ARMCM0 
-    INTERFACE 
-        -Wno-int-to-pointer-cast
-        -Wno-pointer-to-int-cast
+    INTERFACE
         -mthumb
         -mcpu=cortex-m0
 )
@@ -48,9 +46,7 @@ target_sources(ARMCM0plus
 )
 target_compile_definitions(ARMCM0plus INTERFACE ARMCM0P)
 target_compile_options(ARMCM0plus
-    INTERFACE 
-        -Wno-int-to-pointer-cast
-        -Wno-pointer-to-int-cast
+    INTERFACE
         -mthumb
         -mcpu=cortex-m0plus
 )
@@ -72,9 +68,7 @@ target_sources(ARMCM0plusMpu
 )
 target_compile_definitions(ARMCM0plusMpu INTERFACE ARMCM0P_MPU)
 target_compile_options(ARMCM0plusMpu 
-    INTERFACE 
-        -Wno-int-to-pointer-cast
-        -Wno-pointer-to-int-cast
+    INTERFACE
         -mthumb
         -mcpu=cortex-m0plus
 )
@@ -95,9 +89,7 @@ target_sources(ARMCM1
 )
 target_compile_definitions(ARMCM1 INTERFACE ARMCM1)
 target_compile_options(ARMCM1 
-    INTERFACE 
-        -Wno-int-to-pointer-cast
-        -Wno-pointer-to-int-cast
+    INTERFACE
         -mthumb
         -mcpu=cortex-m1
 )
@@ -118,9 +110,7 @@ target_sources(ARMCM3
 )
 target_compile_definitions(ARMCM3 INTERFACE ARMCM3)
 target_compile_options(ARMCM3
-    INTERFACE 
-        -Wno-int-to-pointer-cast
-        -Wno-pointer-to-int-cast
+    INTERFACE
         -mthumb
         -mcpu=cortex-m3
 )
@@ -142,9 +132,7 @@ target_sources(ARMCM4
 )
 target_compile_definitions(ARMCM4 INTERFACE ARMCM4)
 target_compile_options(ARMCM4
-    INTERFACE 
-        -Wno-int-to-pointer-cast
-        -Wno-pointer-to-int-cast
+    INTERFACE
         -mthumb
         -mcpu=cortex-m4
 )
@@ -166,9 +154,7 @@ target_sources(ARMCM4_SOFT_FP
 )
 target_compile_definitions(ARMCM4_SOFT_FP INTERFACE ARMCM4_FP)
 target_compile_options(ARMCM4_SOFT_FP
-    INTERFACE 
-        -Wno-int-to-pointer-cast
-        -Wno-pointer-to-int-cast
+    INTERFACE
         -mthumb
         -mcpu=cortex-m4
         -mfloat-abi=softfp
@@ -192,9 +178,7 @@ target_sources(ARMCM4_HARD_FP
 )
 target_compile_definitions(ARMCM4_HARD_FP INTERFACE ARMCM4_FP)
 target_compile_options(ARMCM4_HARD_FP
-    INTERFACE 
-        -Wno-int-to-pointer-cast
-        -Wno-pointer-to-int-cast
+    INTERFACE
         -mthumb
         -mcpu=cortex-m4
         -mfloat-abi=hard
@@ -220,9 +204,7 @@ target_sources(${CPU_TARGET}
 )
 target_compile_definitions(${CPU_TARGET} INTERFACE ARMCM7)
 target_compile_options(${CPU_TARGET}
-    INTERFACE 
-        -Wno-int-to-pointer-cast
-        -Wno-pointer-to-int-cast
+    INTERFACE
         -mthumb
         -mcpu=cortex-m7
         -march=armv7e-m
@@ -247,9 +229,7 @@ target_sources(${CPU_TARGET}
 )
 target_compile_definitions(${CPU_TARGET} INTERFACE ARMCM23)
 target_compile_options(${CPU_TARGET}
-    INTERFACE 
-        -Wno-int-to-pointer-cast
-        -Wno-pointer-to-int-cast
+    INTERFACE
         -mthumb
         -mcpu=cortex-m23
 )
@@ -274,9 +254,7 @@ target_sources(${CPU_TARGET}
 )
 target_compile_definitions(${CPU_TARGET} INTERFACE ARMCM33)
 target_compile_options(${CPU_TARGET}
-    INTERFACE 
-        -Wno-int-to-pointer-cast
-        -Wno-pointer-to-int-cast
+    INTERFACE
         -mthumb
         -mcpu=cortex-m33+nodsp+nofp
 )
@@ -300,9 +278,7 @@ target_sources(${CPU_TARGET}
 )
 target_compile_definitions(${CPU_TARGET} INTERFACE ARMCM33_DSP_FP)
 target_compile_options(${CPU_TARGET}
-    INTERFACE 
-        -Wno-int-to-pointer-cast
-        -Wno-pointer-to-int-cast
+    INTERFACE
         -mthumb
         -mcpu=cortex-m33+dsp+fp
 )
@@ -327,9 +303,7 @@ target_sources(${CPU_TARGET}
 )
 target_compile_definitions(${CPU_TARGET} INTERFACE ARMCM35P)
 target_compile_options(${CPU_TARGET}
-    INTERFACE 
-        -Wno-int-to-pointer-cast
-        -Wno-pointer-to-int-cast
+    INTERFACE
         -mthumb
         -mcpu=cortex-m35p+nodsp+nofp
 )
@@ -353,9 +327,7 @@ target_sources(${CPU_TARGET}
 )
 target_compile_definitions(${CPU_TARGET} INTERFACE ARMCM35P_DSP_FP)
 target_compile_options(${CPU_TARGET}
-    INTERFACE 
-        -Wno-int-to-pointer-cast
-        -Wno-pointer-to-int-cast
+    INTERFACE
         -mthumb
         -mcpu=cortex-m35p
 )
@@ -377,9 +349,7 @@ target_sources(ARMCM55
 )
 target_compile_definitions(ARMCM55 INTERFACE ARMCM55)
 target_compile_options(ARMCM55
-    INTERFACE 
-        -Wno-int-to-pointer-cast
-        -Wno-pointer-to-int-cast
+    INTERFACE
         -mthumb
         -mcpu=cortex-m55 # seems that not all versions of arm-none-eabi-gcc toolchain support this flag for mcpu
         -mfpu=fpv5-sp-d16
