@@ -523,3 +523,21 @@ foreach(target ${CMSIS_CORTEX_TARGETS})
     message(" - ${target}")
 endforeach(target ${CMSIS_CORTEX_TARGETS})
 message("")
+
+
+
+set(DOT_EXECUTABLE dot)
+find_program(DOT_EXE "${DOT_EXECUTABLE}")
+if(NOT ${DOT_EXE}-NOTFOUND)
+    set(GRAPHVIZ_IMAGE_TARGET graphviz)
+    if(NOT TARGET ${GRAPHVIZ_IMAGE_TARGET})
+        add_custom_target(${GRAPHVIZ_IMAGE_TARGET} ALL
+            COMMAND ${CMAKE_COMMAND} "--graphviz=graph.dot" .
+            COMMAND ${DOT_EXECUTABLE} -Tpng graph.dot -o ${PROJECT_NAME}_software_arch.png
+            WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
+        )
+    endif(NOT TARGET ${GRAPHVIZ_IMAGE_TARGET})
+else()
+    message(WARNING "Cannot create graphviz visualization of software architecture because ${DOT_EXECUTABLE} not found")
+endif(NOT ${DOT_EXE}-NOTFOUND)
+
