@@ -578,10 +578,10 @@ function(CMSIS_get_targets output_var)
 endfunction(CMSIS_get_targets output_var)
 
 
-function(CMSIS_list_targets output_var)
+function(CMSIS_list_targets)
     message("Listing cmsis targets ...")
     foreach(target ${CMSIS_CORTEX_TARGETS})
         message(" - ${target}")
     endforeach(target ${CMSIS_CORTEX_TARGETS})
     message("")
-endfunction(CMSIS_list_targets output_var)
+endfunction(CMSIS_list_targets)
