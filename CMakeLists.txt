@@ -289,8 +289,7 @@ target_compile_options(${CPU_TARGET}
         -Wno-pointer-to-int-cast
     PUBLIC
         -mthumb
-        -mcpu=cortex-m33
-        -march=armv8-m.main+nodsp+nofp # THE nodsp and nofp parts are IMPORTANT
+        -mcpu=cortex-m33+nodsp+nofp
 )
 
 
@@ -317,8 +316,7 @@ target_compile_options(${CPU_TARGET}
         -Wno-pointer-to-int-cast
     PUBLIC
         -mthumb
-        -mcpu=cortex-m33
-        -march=armv8-m.main # THE nodsp and nofp parts are IMPORTANT
+        -mcpu=cortex-m33+dsp+fp
 )
 
 
