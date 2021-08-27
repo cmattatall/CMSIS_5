@@ -6,10 +6,10 @@ project(CMSIS
 )
 
 
-set(CMSIS_CORTEX_BRINGUP_TARGETS "") # empty list
+set(CMSIS_CORTEX_TARGETS "") # empty list
 
 add_library(ARMCM0)
-list(APPEND CMSIS_CORTEX_BRINGUP_TARGETS ARMCM0)
+list(APPEND CMSIS_CORTEX_TARGETS ARMCM0)
 target_include_directories(ARMCM0 
     PUBLIC 
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/ARMCM0/Include>
@@ -35,7 +35,7 @@ target_compile_options(ARMCM0
 
 
 add_library(ARMCM0plus)
-list(APPEND CMSIS_CORTEX_BRINGUP_TARGETS ARMCM0plus)
+list(APPEND CMSIS_CORTEX_TARGETS ARMCM0plus)
 target_include_directories(ARMCM0plus 
     PUBLIC 
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/ARMCM0plus/Include>
@@ -61,7 +61,7 @@ target_compile_options(ARMCM0plus
 
 
 add_library(ARMCM0plusMpu)
-list(APPEND CMSIS_CORTEX_BRINGUP_TARGETS ARMCM0plusMpu)
+list(APPEND CMSIS_CORTEX_TARGETS ARMCM0plusMpu)
 target_include_directories(ARMCM0plusMpu
     PUBLIC 
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/ARMCM0plus/Include>
@@ -86,7 +86,7 @@ target_compile_options(ARMCM0plusMpu
 )
 
 add_library(ARMCM1)
-list(APPEND CMSIS_CORTEX_BRINGUP_TARGETS ARMCM1)
+list(APPEND CMSIS_CORTEX_TARGETS ARMCM1)
 target_include_directories(ARMCM1 
     PUBLIC 
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/ARMCM1/Include>
@@ -111,7 +111,7 @@ target_compile_options(ARMCM1
 )
 
 add_library(ARMCM3)
-list(APPEND CMSIS_CORTEX_BRINGUP_TARGETS ARMCM3)
+list(APPEND CMSIS_CORTEX_TARGETS ARMCM3)
 target_include_directories(ARMCM3 
     PUBLIC 
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/ARMCM3/Include>
@@ -137,7 +137,7 @@ target_compile_options(ARMCM3
 
 
 add_library(ARMCM4)
-list(APPEND CMSIS_CORTEX_BRINGUP_TARGETS ARMCM4)
+list(APPEND CMSIS_CORTEX_TARGETS ARMCM4)
 target_include_directories(ARMCM4 
     PUBLIC 
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/ARMCM4/Include>
@@ -163,7 +163,7 @@ target_compile_options(ARMCM4
 
 
 add_library(ARMCM4_SOFT_FP)
-list(APPEND CMSIS_CORTEX_BRINGUP_TARGETS ARMCM4_SOFT_FP)
+list(APPEND CMSIS_CORTEX_TARGETS ARMCM4_SOFT_FP)
 target_include_directories(ARMCM4_SOFT_FP 
     PUBLIC 
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/ARMCM4/Include>
@@ -191,7 +191,7 @@ target_compile_options(ARMCM4_SOFT_FP
 
 
 add_library(ARMCM4_HARD_FP)
-list(APPEND CMSIS_CORTEX_BRINGUP_TARGETS ARMCM4_HARD_FP)
+list(APPEND CMSIS_CORTEX_TARGETS ARMCM4_HARD_FP)
 target_include_directories(ARMCM4_HARD_FP 
     PUBLIC 
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/ARMCM4/Include>
@@ -221,7 +221,7 @@ target_compile_options(ARMCM4_HARD_FP
 set(CPU_TARGET ARMCM7)
 set(CPU_CMSIS_DIR ARMCM7)
 add_library(${CPU_TARGET})
-list(APPEND CMSIS_CORTEX_BRINGUP_TARGETS ${CPU_TARGET})
+list(APPEND CMSIS_CORTEX_TARGETS ${CPU_TARGET})
 target_include_directories(${CPU_TARGET}
     PUBLIC 
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/${CPU_CMSIS_DIR}/Include>
@@ -250,7 +250,7 @@ target_compile_options(${CPU_TARGET}
 set(CPU_TARGET ARMCM23)
 set(CPU_CMSIS_DIR ARMCM23)
 add_library(${CPU_TARGET})
-list(APPEND CMSIS_CORTEX_BRINGUP_TARGETS ${CPU_TARGET})
+list(APPEND CMSIS_CORTEX_TARGETS ${CPU_TARGET})
 target_include_directories(${CPU_TARGET}
     PUBLIC 
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/${CPU_CMSIS_DIR}/Include>
@@ -279,7 +279,7 @@ target_compile_options(${CPU_TARGET}
 set(CPU_TARGET ARMCM33)
 set(CPU_CMSIS_DIR ARMCM33)
 add_library(${CPU_TARGET})
-list(APPEND CMSIS_CORTEX_BRINGUP_TARGETS ${CPU_TARGET})
+list(APPEND CMSIS_CORTEX_TARGETS ${CPU_TARGET})
 target_include_directories(${CPU_TARGET}
     PUBLIC 
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/${CPU_CMSIS_DIR}/Include>
@@ -308,7 +308,7 @@ target_compile_options(${CPU_TARGET}
 set(CPU_TARGET ARMCM33_DSP_FP)
 set(CPU_CMSIS_DIR ARMCM33)
 add_library(${CPU_TARGET})
-list(APPEND CMSIS_CORTEX_BRINGUP_TARGETS ${CPU_TARGET})
+list(APPEND CMSIS_CORTEX_TARGETS ${CPU_TARGET})
 target_include_directories(${CPU_TARGET}
     PUBLIC 
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/${CPU_CMSIS_DIR}/Include>
@@ -338,7 +338,7 @@ target_compile_options(${CPU_TARGET}
 set(CPU_TARGET ARMCM35P)
 set(CPU_CMSIS_DIR ARMCM35P)
 add_library(${CPU_TARGET})
-list(APPEND CMSIS_CORTEX_BRINGUP_TARGETS ${CPU_TARGET})
+list(APPEND CMSIS_CORTEX_TARGETS ${CPU_TARGET})
 target_include_directories(${CPU_TARGET}
     PUBLIC 
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/${CPU_CMSIS_DIR}/Include>
@@ -366,7 +366,7 @@ target_compile_options(${CPU_TARGET}
 set(CPU_TARGET ARMCM35P_DSP_FP)
 set(CPU_CMSIS_DIR ARMCM35P)
 add_library(${CPU_TARGET})
-list(APPEND CMSIS_CORTEX_BRINGUP_TARGETS ${CPU_TARGET})
+list(APPEND CMSIS_CORTEX_TARGETS ${CPU_TARGET})
 target_include_directories(${CPU_TARGET}
     PUBLIC 
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/${CPU_CMSIS_DIR}/Include>
@@ -392,7 +392,7 @@ target_compile_options(${CPU_TARGET}
 
 
 add_library(ARMCM55)
-list(APPEND CMSIS_CORTEX_BRINGUP_TARGETS ARMCM55)
+list(APPEND CMSIS_CORTEX_TARGETS ARMCM55)
 target_include_directories(ARMCM55
     PUBLIC 
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Device/ARM/ARMCM55/Include>
@@ -430,7 +430,7 @@ set(INSTALL_BINDIR bin)
 set(INSTALL_CONFIGDIR ${INSTALL_LIBDIR}/cmake/CMSIS)
 
 install(
-    TARGETS     ${CMSIS_CORTEX_BRINGUP_TARGETS}
+    TARGETS     ${CMSIS_CORTEX_TARGETS}
     EXPORT      CMSIS
     LIBRARY     DESTINATION ${INSTALL_LIBDIR}/CMSIS/
     ARCHIVE     DESTINATION ${INSTALL_LIBDIR}/CMSIS/
@@ -572,3 +572,16 @@ message(STATUS
 )
 
 include(CPack)
+
+function(CMSIS_get_targets output_var)
+    set(${output_var} ${CMSIS_CORTEX_TARGETS} PARENT_SCOPE)
+endfunction(CMSIS_get_targets output_var)
+
+
+function(CMSIS_list_targets output_var)
+    message("Listing cmsis targets ...")
+    foreach(target ${CMSIS_CORTEX_TARGETS})
+        message(" - ${target}")
+    endforeach(target ${CMSIS_CORTEX_TARGETS})
+    message("")
+endfunction(CMSIS_list_targets output_var)
